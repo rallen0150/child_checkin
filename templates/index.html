@@ -2,4 +2,11 @@
 
 {% block content %}
   <h1>Hello</h1>
+  Logged in as: {{ request.user }}
+
+  <form class="" action="" method="post">
+      {% csrf_token %}
+      <input type="text" name="pin_number" placeholder="Pin Code: ####">
+      <input type="submit" name="" value="Find Kid">
+  </form>
 {% endblock %}
