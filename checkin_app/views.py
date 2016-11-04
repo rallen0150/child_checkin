@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 
 from random import choice
 from string import digits
-from checkin_app.models import Child, Profile
+from checkin_app.models import Child, Profile, Time
 
 
 class UserCreateView(CreateView):
@@ -63,7 +63,7 @@ class EmployeeListView(ListView):
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
-    #     context['profile_list'] = Profile.objects.filter(status='P')
+    #     context['profile_list'] = Profile.objects.all()
     #     return context
 
 class SchoolDetailView(TemplateView):

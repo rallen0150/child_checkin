@@ -6,15 +6,15 @@ from django.contrib.auth.models import User
 class Child(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    checkin_time = models.DateTimeField(auto_now=True)
+    # checkin_time = models.DateTimeField(auto_now=True)
     # parent = models.ForeignKey('auth.User')
     parent = models.ForeignKey('checkin_app.Profile')
     checkin = models.BooleanField(default=False)
-    checkout_time = models.DateTimeField(auto_now=True)
+    # checkout_time = models.DateTimeField(auto_now=True)
     pin_number = models.CharField(max_length=4, unique=True)
 
     def __str__(self):
-        return self.parent
+        return str(self.first_name + ' ' + self.last_name)
 
     @property
     def get_full_name(self):
@@ -25,8 +25,10 @@ class Child(models.Model):
 #     pin_number = models.IntegerField()
 
 
-# class Daycare(models.Model):
-#     daycare = models.ManyToManyField(Child)
+class Time(models.Model):
+    checkin_time = models.DateTimeField(auto_now=False)
+    checkout_time = models.DateTimeField(auto_now=False)
+    child = models.ForeignKey(Child)
 
 STATUS = [
     ('O', 'Owner'),
@@ -38,7 +40,7 @@ class Profile(models.Model):
     status = models.CharField(max_length=1, choices=STATUS)
 
     def __str__(self):
-        return str()
+        return str(self.user)
 
 
 @receiver(post_save, sender=User)
