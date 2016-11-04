@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <a href="{% url 'child_create_view' %}">Add a Child</a> <br> <br>
+  {% comment %}
+    <form class="" action="{% url 'child_create_view' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="first_name" value="" placeholder="First Name">
+        <input type="text" name="last_name" value="" placeholder="Last Name">
+        <select class="" name="parent">
+          {% for parent in profile_list %}
+            <option value="parent">{{ parent.user }}</option>
+          {% endfor %}
+        </select>
+      <input type="submit" name="" value="Register">
+    </form>
+  {% endcomment %}
+
+  <br>
+  <div class="label">
+    Child's Name, Pin Number
+  </div>
+  {% for child in child_list %}
+    <p>
+      {{ child.get_full_name}} {{ child.pin_number }}
+    </p>
+  {% endfor %}
+
+{% endblock %}

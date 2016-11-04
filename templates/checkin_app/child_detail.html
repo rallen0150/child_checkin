@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Parent: {{ object.parent }}</h1>
+  <h1>Parent: {{ object.parent.user }}</h1>
   <br>
   <h1>Child: {{ object.get_full_name }}</h1>
 
   {% if object.checkin == True %}
     <h3>On Site</h3>
+    <h4><a href="{% url 'child_update_view' object.id %}">Checkout</a></h4>
   {% else %}
     <h3>Not On Site</h3>
+    <h4><a href="{% url 'child_update_view' object.id %}">Checkin</a></h4>
   {% endif %}
 
+  {% comment %}
   <form class="" action="{% url 'child_update_view' object.id %}" method="post">
       {% csrf_token %}
       Checkin: <input type="checkbox" name="checkin" value="">
       <input type="submit" name="" value="Checkin!">
   </form>
+  {% endcomment %}
 {% endblock %}

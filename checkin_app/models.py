@@ -7,13 +7,14 @@ class Child(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     checkin_time = models.DateTimeField(auto_now=True)
-    parent = models.ForeignKey('auth.User')
+    # parent = models.ForeignKey('auth.User')
+    parent = models.ForeignKey('checkin_app.Profile')
     checkin = models.BooleanField(default=False)
     checkout_time = models.DateTimeField(auto_now=True)
     pin_number = models.CharField(max_length=4, unique=True)
 
-    # def __str__(self):
-    #     return self.parent
+    def __str__(self):
+        return self.parent
 
     @property
     def get_full_name(self):
@@ -35,6 +36,9 @@ STATUS = [
 class Profile(models.Model):
     user = models.OneToOneField('auth.User')
     status = models.CharField(max_length=1, choices=STATUS)
+
+    def __str__(self):
+        return str()
 
 
 @receiver(post_save, sender=User)
