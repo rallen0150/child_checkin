@@ -8,6 +8,7 @@ class Child(models.Model):
     last_name = models.CharField(max_length=30)
     parent = models.ForeignKey('auth.User')
     pincode = models.CharField(max_length=4, unique=True)
+    picture = models.FileField(null=True, blank=True)
 
     @property
     def get_full_name(self):
@@ -26,6 +27,13 @@ class Child(models.Model):
         total = round(sum(time.daily_time.seconds for time in get_time)/3600, 3)
         hourly_rate = 300.00
         return round(float(total * hourly_rate), 2)
+
+    @property
+    def image_url(self):
+        if self.picture:
+            return self.picture.url
+        return "https://secure.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=1024&d=mm&r=g"
+
 
 class Time(models.Model):
     child = models.ForeignKey(Child)
