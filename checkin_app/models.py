@@ -23,7 +23,7 @@ class Profile(models.Model):
 
     @property
     def is_employee(self):
-        return self.status == 'E'
+        return self.access_level == 'E'
 
     # @property
     # def all_time(self):
@@ -53,23 +53,18 @@ class Child(models.Model):
         return Time.objects.filter(child=self)
 
     @property
-    def full_time(self):
-        get_time = self.get_time
-        total = sum(time.daily_time.seconds for time in get_time)
-        return round(total / 3600, 3)
-
-    @property
     def total_payment(self):
-        full_time = self.full_time
+        get_time = self.get_time
+        total = round(sum(time.daily_time.seconds for time in get_time)/3600, 3)
         hourly_rate = 300.00
-        return round(float(full_time * hourly_rate), 2)
+        return round(float(total * hourly_rate), 2)
 
 
 class Time(models.Model):
     child = models.ForeignKey(Child)
     checkin = models.BooleanField(default=False)
     checkin_time = models.DateTimeField(auto_now_add=True)
-    checkout_time = models.DateTimeField(auto_now=True, null=True)
+    checkout_time = models.DateTimeField(auto_now=False, null=True)
 
     @property
     def daily_time(self):

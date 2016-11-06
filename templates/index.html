@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Welcome to Stop n' Play Daycare</h1>
+  <h1>Welcome to Stop n' Play Daycare</h1><br>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-warning">  
+        <div class="panel panel-heading">
+          Find Your Child
+        </div>
+        <div class="panel-body">
+        <form class="" action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="pincode" placeholder="Pin Code: #######">
+            <input type="submit" name="" value="Find Kid">
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <form class="" action="" method="post">
-      {% csrf_token %}
-      <input type="text" name="pincode" placeholder="Pin Code: #######">
-      <input type="submit" name="" value="Find Kid">
-  </form>
 
 {% endblock %}

@@ -19,13 +19,24 @@
 
   <br>
   <br>
-
-    <h4>Child's Name, Pin Number</h4>
-
-  {% for child in child_list %}
-    <p>
-      {{ child.get_full_name }} {{ child.pincode }}
-    </p>
-  {% endfor %}
+  {% if request.user.profile.is_employee %}
+  <div class="row">
+      <div class="panel panel-info">
+        <div class="panel panel-heading">
+          <h2>Child's Name, Pin Number</h2>
+        </div>
+        {% for child in child_list %}
+        <div class="panel panel-body">
+          <div class="col-md-2">
+            {{ child.get_full_name }}
+          </div>
+          <div class="col-md-2">
+            {{ child.pincode }}
+          </div>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
+  {% endif %}
 
 {% endblock %}
