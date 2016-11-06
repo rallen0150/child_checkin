@@ -15,7 +15,7 @@ from checkin_app.models import Child, Profile, Time
 class UserCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('index_view')
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -53,11 +53,6 @@ class ChildDetailView(DetailView):
         context["child"] = Child.objects.all()
         return context
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["time_list"] = Time.objects.all()
-    #     return context
-
 class TimeCreateView(CreateView):
     model = Time
     fields = ('checkin', )
@@ -82,20 +77,6 @@ class TimeUpdateView(UpdateView):
             return super().form_valid(form)
         return super().form_valid(form)
 
-
-# class ChildUpdateView(UpdateView):
-#     model = Time
-#     fields = ('checkin', )
-#     success_url = reverse_lazy('index_view')
-#
-#     def form_valid(self, form):
-#         instance = form.save(commit=False)
-#         if instance.checkin:
-#             instance.checkin_time = datetime.now()
-#         else:
-#             instance.checkout_time = datetime.now()
-#         return super().form_valid(form)
-
 class EmployeeListView(ListView):
     model = Child
 
@@ -103,11 +84,6 @@ class EmployeeListView(ListView):
         context = super().get_context_data(**kwargs)
         context["child_list"] = Child.objects.all()
         return context
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['profile_list'] = Profile.objects.all()
-    #     return context
 
 class SchoolDetailView(TemplateView):
     model = Child
