@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  
+
   {% comment %}
     <form class="" action="{% url 'child_create_view' %}" method="post">
         {% csrf_token %}
@@ -18,9 +18,10 @@
   {% endcomment %}
 
   <br>
-  <div class="label">
-    Child's Name, Pin Number
-  </div>
+  <br>
+
+    <h4>Child's Name, Pin Number</h4>
+
   {% for child in child_list %}
     <p>
       {{ child.get_full_name }} {{ child.pincode }}
