@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Parent: {{ child.parent.user }}</h1>
-  <br>
+  <a href="{% url 'time_create_view' child.id %}">Initial Checkin</a>
+
   <h1>Child: {{ child.get_full_name }}</h1>
 
-  {% if time_list.checkin == True %}
-    <h3>On Site</h3>
-    <a href="{% url 'time_update_view' object.id %}">CheckOut</a>
-  {% else %}
-    <h3>Not On Site</h3>
-    <a href="{% url 'time_update_view' object.id %}">CheckIn</a>
-  {% endif %}
   <br> <br>
-  Checkin: {{ child.get_time.checkin_time }}<br>
-  Checkout: {{ child.get_time.checkout_time }}
+  {% for x in child.get_time %}
+    {% if x.checkin == True %}
+      <h3>On Site</h3>
+      <a href="{% url 'time_update_view' object.id %}">CheckOut</a>
+    {% else %}
+      <h3>Not On Site</h3>
+      <a href="{% url 'time_update_view' object.id %}">CheckIn</a>
+    {% endif %}
+    <br><br>
+      Checkin: {{ x.checkin_time }}<br>
+      Checkout: {{ x.checkout_time }}
+  {% endfor %}
+  <br><br>
+  <h3>Payment: ${{ child.total_payment|floatformat:2 }}</h3>
 
   {% comment %}
     <form class="" action="{% url 'child_update_view' object.id %}" method="post">

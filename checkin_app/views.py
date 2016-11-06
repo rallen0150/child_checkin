@@ -27,8 +27,8 @@ class IndexView(TemplateView):
 
     def post(self, request):
         print(request.POST)
-        pin = request.POST['pin_number']
-        child_pin = Child.objects.get(pin_number=pin)
+        pin = request.POST['pincode']
+        child_pin = Child.objects.get(pincode=pin)
 
         return HttpResponseRedirect("http://localhost:8000/child/{}/".format(child_pin.id))
 
@@ -40,9 +40,9 @@ class ChildCreateView(CreateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         # instance.parent = self.request.user
-        instance.pin_number = ''
+        instance.pincode = ''
         for num in range(4):
-            instance.pin_number += choice(digits)
+            instance.pincode += choice(digits)
         return super().form_valid(form)
 
 class ChildDetailView(DetailView):
@@ -61,7 +61,7 @@ class ChildDetailView(DetailView):
 class TimeCreateView(CreateView):
     model = Time
     fields = ('checkin', )
-    success_url = reverse_lazy('employee_list_view')
+    success_url = reverse_lazy('index_view')
 
     def form_valid(self, form):
         instance = form.save(commit=False)
@@ -109,11 +109,11 @@ class EmployeeListView(ListView):
     #     context['profile_list'] = Profile.objects.all()
     #     return context
 
-# class SchoolDetailView(TemplateView):
-#     template_name = 'class.html'
-#     model = Time
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["class_list"] = Time.objects.all()
-#         return context
+class SchoolDetailView(TemplateView):
+    model = Child
+    template_name = 'class.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["class_list"] = Child.objects.all()
+        return context

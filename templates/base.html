@@ -10,6 +10,14 @@
     </style>
   </head>
   <body>
+      <a href="{% url 'child_create_view' %}">Add a Child</a> 
+      <a href="{% url 'user_create_view' %}">New Parent</a>
+      <a href="{% url 'index_view' %}">Home</a>
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'employee_list_view' %}">View Class Roster</a>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}?next={% url 'index_view' %}">Logout</a>
+      {% endif %}
       {% block content %}
 
       {% endblock %}
