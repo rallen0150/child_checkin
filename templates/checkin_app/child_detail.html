@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Parent: {{ object.parent.user }}</h1>
+  <h1>Parent: {{ child.parent.user }}</h1>
   <br>
-  <h1>Child: {{ object.get_full_name }}</h1>
+  <h1>Child: {{ child.get_full_name }}</h1>
 
-  {% if object.checkin == True %}
+  {% if time_list.checkin == True %}
     <h3>On Site</h3>
-    <h4><a href="{% url 'child_update_view' object.id %}">Checkout</a></h4>
+    <a href="{% url 'time_update_view' object.id %}">CheckOut</a>
   {% else %}
     <h3>Not On Site</h3>
-    <h4><a href="{% url 'child_update_view' object.id %}">Checkin</a></h4>
+    <a href="{% url 'time_update_view' object.id %}">CheckIn</a>
   {% endif %}
+  <br> <br>
+  Checkin: {{ child.get_time.checkin_time }}<br>
+  Checkout: {{ child.get_time.checkout_time }}
 
   {% comment %}
-  <form class="" action="{% url 'child_update_view' object.id %}" method="post">
-      {% csrf_token %}
-      Checkin: <input type="checkbox" name="checkin" value="">
-      <input type="submit" name="" value="Checkin!">
-  </form>
+    <form class="" action="{% url 'child_update_view' object.id %}" method="post">
+        {% csrf_token %}
+        Checkin: <input type="checkbox" name="checkin" value="">
+        <input type="submit" name="" value="Checkin!">
+    </form>
   {% endcomment %}
 {% endblock %}

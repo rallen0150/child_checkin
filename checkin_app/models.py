@@ -7,18 +7,22 @@ class Child(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     # checkin_time = models.DateTimeField(auto_now=True)
-    # parent = models.ForeignKey('auth.User')
+    parent = models.ForeignKey('auth.User')
     parent = models.ForeignKey('checkin_app.Profile')
-    checkin = models.BooleanField(default=False)
     # checkout_time = models.DateTimeField(auto_now=True)
     pin_number = models.CharField(max_length=4, unique=True)
-
-    def __str__(self):
-        return str(self.first_name + ' ' + self.last_name)
+    # checkin = models.BooleanField(default=False)
 
     @property
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name
+
+    def __str__(self):
+        return self.get_full_name
+
+    @property
+    def get_time(self):
+        return Time.objects.get(child=self)
 
 # class Pin(models.Model):
 #     child = models.OneToOneField(Child)
@@ -26,9 +30,12 @@ class Child(models.Model):
 
 
 class Time(models.Model):
-    checkin_time = models.DateTimeField(auto_now=False)
-    checkout_time = models.DateTimeField(auto_now=False)
+    checkin_time = models.DateTimeField(auto_now_add=True)
+    checkout_time = models.DateTimeField(auto_now=False, null=True)
     child = models.ForeignKey(Child)
+    checkin = models.BooleanField(default=False)
+
+
 
 STATUS = [
     ('O', 'Owner'),
