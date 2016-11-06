@@ -19,7 +19,7 @@
       Checkout: {{ x.checkout_time }}
   {% endfor %}
   <br><br>
-
+  <h3>Payment: ${{ object.total_payment|floatformat:2 }}</h3>
 
   {% comment %}
     <form class="" action="{% url 'child_update_view' object.id %}" method="post">
