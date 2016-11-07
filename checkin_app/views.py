@@ -93,8 +93,9 @@ class EmployeeListView(ListView):
         context["child_list"] = Child.objects.all()
         return context
 
-class SchoolDetailView(TemplateView):
+class SchoolDetailView(ListView):
     template_name = 'class.html'
+    model = Time
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

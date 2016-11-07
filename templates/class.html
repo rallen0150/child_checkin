@@ -3,7 +3,7 @@
 {% block content %}
 <h3>Children On Site</h3>
   {% for child in class_list %}
-    {% if child.get_time.checkin %}
+    {% if object_list.checkin %}
       <a href="{% url 'child_detail_view' child.id %}">{{ child.get_full_name }}</a><br>
     {% endif %}
   {% endfor %}

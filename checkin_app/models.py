@@ -24,7 +24,7 @@ class Child(models.Model):
     @property
     def total_payment(self):
         get_time = self.get_time
-        total = round(sum(time.daily_time.seconds for time in get_time)/3600, 3)
+        total = round(sum(x.daily_time.seconds for x in get_time)/3600, 3)
         hourly_rate = 300.00
         return round(float(total * hourly_rate), 2)
 

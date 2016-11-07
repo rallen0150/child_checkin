@@ -29,12 +29,39 @@
         </div>
       </div>
     </div>
+  </div>
     {% comment %}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel panel-heading">
+            <h3 class="title">Parent: {{ object.parent }}</h3>
+          </div>
+          <div class="panel-body">
+            {% for x in object.get_time %}
+              {% if x.checkin == True %}
+                <h2>On Site</h2>
+                <h3><a href="{% url 'time_update_view' object.id %}">Check Out</a></h3>
+              {% else %}
+                <h2>Not On Site</h2>
+                <h3><a href="{% url 'time_update_view' object.id %}">Check In</a></h3>
+              {% endif %}
+                Checkin: {{ x.checkin_time }}<br>
+                Checkout: {{ x.checkout_time }} <br>
+                <h4>Total Time Spent: {{ x.daily_time }}</h4>
+            {% endfor %}
+          </div>
+          <div class="panel-footer">
+            <h3>Payment: ${{ object.total_payment|floatformat:2 }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-6">
-      <img src="{{ MEDIA_URL}}{{ object.image_url }}" alt="Picture of {{ object.image_url }}" />
+      <img src="{{ MEDIA_URL }}{{ object.image_url }}" alt="Picture of {{ object.image_url }}" />
     </div>
     {% endcomment %}
-  </div>
+
 
 
   {% comment %}
