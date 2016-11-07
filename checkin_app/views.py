@@ -42,7 +42,7 @@ class IndexView(TemplateView):
 
 class ChildCreateView(CreateView):
     model = Child
-    fields = ('first_name', 'last_name', 'parent')
+    fields = ('first_name', 'last_name', 'parent', 'picture')
     success_url = reverse_lazy('employee_list_view')
 
     def form_valid(self, form):
