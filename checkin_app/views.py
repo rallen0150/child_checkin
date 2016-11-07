@@ -94,7 +94,6 @@ class EmployeeListView(ListView):
         return context
 
 class SchoolDetailView(TemplateView):
-    model = Child
     template_name = 'class.html'
 
     def get_context_data(self, **kwargs):

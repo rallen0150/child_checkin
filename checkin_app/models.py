@@ -45,7 +45,6 @@ class Time(models.Model):
     def daily_time(self):
         return self.checkout_time - self.checkin_time
 
-
 ACCESS_LEVEL = [
     ('P', 'Parent'),
     ('E', 'Employee')
