@@ -36,6 +36,9 @@
     .title {
       color: white;
     }
+    #name {
+      color: white;
+    }
     </style>
   </head>
   <body>
@@ -47,18 +50,20 @@
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Navigate<span class="caret"></span></a>
               <ul class="dropdown-menu">
                   <li><a href="{% url 'index_view' %}">Home</a></li>
-                  <li><a href="{% url 'child_create_view' %}">Add a Child</a></li>
-                  <li><a href="{% url 'user_create_view' %}">New Parent/Employee</a></li>
-                  <li><a href="{% url 'employee_list_view' %}">View Class Roster</a></li>
-                  {% if not request.user.is_authenticated %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                  {% else %}
+                  {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'child_create_view' %}">Add a Child</a></li>
+                    <li><a href="{% url 'user_create_view' %}">New Parent/Employee</a></li>
+                    <li><a href="{% url 'employee_list_view' %}">View Class Roster</a></li>
+                    <li><a href="{% url 'school_detail_view' %}">All Kids Checked In</a></li>
                     <li><a href="{% url 'profile_view' %}">Profile</a></li>
                     <li><a href="{% url 'logout' %}?next={% url 'index_view' %}">Logout</a></li>
+                  {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+
                   {% endif %}
               </ul>
             </li>
-            <p class="navbar-text navbar-right">Signed in as {{ request.user }}</p>
+            <p class="navbar-text navbar-right">Signed in as <b id="name">{{ request.user }}</b></p>
           </ul>
 
 
