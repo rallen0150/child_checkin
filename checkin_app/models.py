@@ -21,6 +21,7 @@ class Child(models.Model):
     def get_time(self):
         return Time.objects.filter(child=self)
 
+# Tommy helped with the payment formula
     @property
     def total_payment(self):
         get_time = self.get_time

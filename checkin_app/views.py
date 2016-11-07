@@ -33,11 +33,11 @@ class IndexView(TemplateView):
         context["children"] = Child.objects.all()
         return context
 
+    # To find the child's information
     def post(self, request):
         print(request.POST)
         pin = request.POST['pincode']
         child_pin = Child.objects.get(pincode=pin)
-
         return HttpResponseRedirect("http://localhost:8000/child/{}/".format(child_pin.id))
 
 class ChildCreateView(CreateView):
@@ -93,9 +93,9 @@ class EmployeeListView(ListView):
         context["child_list"] = Child.objects.all()
         return context
 
-class SchoolDetailView(ListView):
+class SchoolDetailView(TemplateView):
     template_name = 'class.html'
-    model = Time
+    # model = Time
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
