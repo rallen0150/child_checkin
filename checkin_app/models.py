@@ -21,13 +21,13 @@ class Child(models.Model):
     def get_time(self):
         return Time.objects.filter(child=self)
 
-# Tommy helped with the payment formula
+    # Tommy helped with the payment formula
     @property
     def total_payment(self):
         get_time = self.get_time
-        total = round(sum(x.daily_time.seconds for x in get_time)/3600, 3)
+        total = round(sum(x.daily_time.seconds for x in get_time)/3600, 4)
         hourly_rate = 300.00
-        return round(float(total * hourly_rate), 2)
+        return round((total * hourly_rate), 2)
 
     @property
     def image_url(self):

@@ -99,5 +99,5 @@ class SchoolDetailView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["class_list"] = Child.objects.all()
+        context["class_list"] = Time.objects.all()
         return context

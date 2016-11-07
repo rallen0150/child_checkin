@@ -1,6 +1,9 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 from checkin_app.views import UserCreateView, IndexView, ChildCreateView, \
                               ChildDetailView, TimeCreateView, EmployeeListView, \
                               TimeUpdateView, SchoolDetailView, ProfileUpdateView
@@ -17,4 +20,4 @@ urlpatterns = [
     url(r'^school/$', SchoolDetailView.as_view(), name='school_detail_view'),
     url(r'^child/(?P<pk>\d+)/create/$', TimeCreateView.as_view(), name='time_create_view'),
     url(r'^child/(?P<pk>\d+)/update/$', TimeUpdateView.as_view(), name='time_update_view'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

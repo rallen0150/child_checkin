@@ -2,9 +2,9 @@
 
 {% block content %}
 <h3>Children On Site</h3>
-  {% for child in class_list.get_time %}
-    {% if child.checkin %}
-      <a href="{% url 'child_detail_view' child.id %}">{{ child.get_full_name }}</a><br>
+  {% for x in class_list %}
+    {% if x.checkin %}
+      <a href="{% url 'child_detail_view' x.id %}">{{ x.child.get_full_name }}</a><br>
     {% endif %}
   {% endfor %}
 {% endblock %}
