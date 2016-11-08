@@ -51,7 +51,7 @@ class Time(models.Model):
     def new_seconds(self):
         total = round(self.daily_time.seconds / 3600, 2)
         total_hour = int(total)
-        minutes = round((total-total_hour) * 60, 1)
+        minutes = int((total-total_hour) * 60)
         return "{} Hours {} Mintues".format(total_hour, minutes)
 
 ACCESS_LEVEL = [
