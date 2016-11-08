@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import datetime
 
 
 class Child(models.Model):
@@ -26,7 +27,7 @@ class Child(models.Model):
     def total_payment(self):
         get_time = self.get_time
         total = round(sum(x.daily_time.seconds for x in get_time)/3600, 4)
-        hourly_rate = 300.00
+        hourly_rate = 30.00
         return round((total * hourly_rate), 2)
 
     @property
@@ -45,6 +46,13 @@ class Time(models.Model):
     @property
     def daily_time(self):
         return self.checkout_time - self.checkin_time
+
+    @property
+    def new_seconds(self):
+        total = round(self.daily_time.seconds / 3600, 2)
+        total_hour = int(total)
+        minutes = round((total-total_hour) * 60, 1)
+        return "{} Hours {} Mintues".format(total_hour, minutes)
 
 ACCESS_LEVEL = [
     ('P', 'Parent'),

@@ -81,7 +81,7 @@ class TimeUpdateView(UpdateView):
     def form_valid(self, form):
         instance = form.save(commit=False)
         if not instance.checkin:
-            instance.checkout_time = datetime.now()
+            instance.checkout_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             return super().form_valid(form)
         return super().form_valid(form)
 
