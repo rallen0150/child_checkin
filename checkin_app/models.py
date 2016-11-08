@@ -50,9 +50,9 @@ class Time(models.Model):
     @property
     def new_seconds(self):
         total = round(self.daily_time.seconds / 3600, 2)
-        total_hour = int(total)
-        minutes = int((total-total_hour) * 60)
-        return "{} Hours {} Mintues".format(total_hour, minutes)
+        hour = int(total)
+        minutes = int((total-hour) * 60)
+        return "{} Hours {} Mintues".format(hour, minutes)
 
 ACCESS_LEVEL = [
     ('P', 'Parent'),
