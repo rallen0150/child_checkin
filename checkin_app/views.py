@@ -76,7 +76,10 @@ class TimeCreateView(CreateView):
 class TimeUpdateView(UpdateView):
     model = Time
     fields = ('checkin', )
-    success_url = reverse_lazy('index_view')
+    # success_url = reverse_lazy('index_view')
+
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('checkin_success_view', args=[int(self.kwargs['pk'])])
 
     def form_valid(self, form):
         instance = form.save(commit=False)
@@ -100,4 +103,13 @@ class SchoolDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["class_list"] = Time.objects.all()
+        return context
+
+class CheckinSuccessView(TemplateView):
+    template_name = ('checkin_app/success.html')
+    model = Time
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["time"] = Time.objects.get(id=self.kwargs['pk'])
         return context

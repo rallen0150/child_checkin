@@ -12,40 +12,66 @@
 
 
     <style media="screen">
-    body {
-      background-color: #49c080;
-    }
-    h2 {
-      text-decoration: underline;
-    }
-    h1 {
-      text-decoration: underline;
-      text-align: center;
-    }
-    .title {
-      text-align: center;
-    }
-    .panel-body {
-      text-align: center;
-    }
-    #table-head {
-      text-align: center;
-    }
-    img {
-      height: 395px;
-      width: 450px;
-    }
-    .title {
-      color: white;
-    }
-    #name {
-      color: white;
-    }
-    .panel-heading {
-      font-size: 28px;
-      font-weight: bold;
-      text-decoration: underline;
-    }
+      body {
+        background-color: #49c080;
+      }
+      h2 {
+        text-decoration: underline;
+      }
+      h1 {
+        text-decoration: underline;
+        text-align: center;
+      }
+      .title {
+        text-align: center;
+      }
+      .panel-body {
+        text-align: center;
+      }
+      #table-head {
+        text-align: center;
+      }
+      img {
+        height: 395px;
+        width: 450px;
+      }
+      .title {
+        color: white;
+      }
+      #name {
+        color: white;
+      }
+      .panel-heading {
+        font-size: 28px;
+        font-weight: bold;
+        text-decoration: underline;
+      }
+      #success {
+        font-size: 22px;
+      }
+      /*Got the loader from the internet*/
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 100%;
+        border-top: 16px solid blue;
+        border-right: 16px solid green;
+        border-bottom: 16px solid red;
+        border-left: 16px solid pink;
+        width: 75px;
+        height: 75px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
     </style>
   </head>
   <body>

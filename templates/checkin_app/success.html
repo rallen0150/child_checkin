@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-success">
+        <div class="panel panel-heading">
+          <p class="text-center">Success</p>
+        </div>
+        <div class="panel-body">
+          <p id='success' class="text-center"><b><u>{{ time.child }}</u></b> has been <i>SUCCESSFULLY</i> {% if time.checkin == True %} <b><u>Checked In!</u></b> {% else %} <b><u>Checked Out!</u></b> {% endif %}</p>
+          <br>
+          <p id="success">{% if time.checkin == True %}Droped off by: <b><u><i>{{ time.child.parent }}</i></u></b> {% else %} Picked up by: <b><u><i>{{ time.child.parent }}</i></u></b> {% endif %}</p>
+        </div>
+        <div class="panel-footer">
+          <p class="text-center">Redirecting in 5 seconds <div class="loader"></div></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    setTimeout(function() {
+      window.location.href = "{% url 'child_detail_view' time.child.id %}";
+    }, 5000);
+  </script>
+{% endblock %}

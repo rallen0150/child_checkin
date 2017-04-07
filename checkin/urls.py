@@ -6,7 +6,8 @@ from django.conf import settings
 
 from checkin_app.views import UserCreateView, IndexView, ChildCreateView, \
                               ChildDetailView, TimeCreateView, EmployeeListView, \
-                              TimeUpdateView, SchoolDetailView, ProfileUpdateView
+                              TimeUpdateView, SchoolDetailView, ProfileUpdateView, \
+                              CheckinSuccessView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -20,4 +21,5 @@ urlpatterns = [
     url(r'^school/$', SchoolDetailView.as_view(), name='school_detail_view'),
     url(r'^child/(?P<pk>\d+)/create/$', TimeCreateView.as_view(), name='time_create_view'),
     url(r'^child/(?P<pk>\d+)/update/$', TimeUpdateView.as_view(), name='time_update_view'),
+    url(r'^child/(?P<pk>\d+)/success/$', CheckinSuccessView.as_view(), name='checkin_success_view'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
